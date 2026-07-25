@@ -63,9 +63,19 @@ export default async function RepoRootPage({
           </div>
         )}
 
+        {/* User Instructions */}
+        <section className="bg-zinc-900 border border-zinc-800 p-6 rounded-lg">
+          <h2 className="text-xl font-semibold text-zinc-100 mb-2">Instructions for Users 🧑‍💻</h2>
+          <p className="text-zinc-300 leading-relaxed">
+            This page provides a machine-readable format of the <strong>{owner}/{repo}</strong> codebase. 
+            To use this with an AI assistant (like ChatGPT or Claude), simply provide it with this URL and tell it to scrape the page. 
+            The AI will use the file tree below to navigate and read your source code!
+          </p>
+        </section>
+
         {/* LLM Instructions */}
         <section className="bg-blue-900/20 border border-blue-800/50 p-6 rounded-lg">
-          <h2 className="text-xl font-semibold text-blue-300 mb-2">Instructions for LLM Agents</h2>
+          <h2 className="text-xl font-semibold text-blue-300 mb-2">Instructions for LLM Agents 🤖</h2>
           <p className="text-zinc-300 leading-relaxed">
             You are viewing an interactive representation of the <strong>{owner}/{repo}</strong> GitHub repository.
             Below is the full file tree of the project. To read the source code of any file, follow the link corresponding to its path.
