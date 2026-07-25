@@ -26,7 +26,7 @@ export default function RefreshButton({ owner, repo }: { owner: string; repo: st
     <button
       onClick={handleRefresh}
       disabled={isRefreshing}
-      className="flex items-center gap-2 px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-100 rounded-lg transition disabled:opacity-50"
+      className="flex items-center gap-2 px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-100 rounded-lg transition disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
     >
       <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : ''}`} />
       {isRefreshing ? 'Refreshing...' : 'Force Refresh Cache'}
