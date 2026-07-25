@@ -1,5 +1,6 @@
 import { getRepoTree, getRepoReadme, FileNode } from '@/lib/github';
 import RefreshButton from '@/components/RefreshButton';
+import CopyUrlButton from '@/components/CopyUrlButton';
 import Link from 'next/link';
 
 import type { Metadata } from 'next';
@@ -66,11 +67,12 @@ export default async function RepoRootPage({
         {/* User Instructions */}
         <section className="bg-zinc-900 border border-zinc-800 p-6 rounded-lg">
           <h2 className="text-xl font-semibold text-zinc-100 mb-2">Instructions for Users 🧑‍💻</h2>
-          <p className="text-zinc-300 leading-relaxed">
+          <p className="text-zinc-300 leading-relaxed mb-2">
             This page provides a machine-readable format of the <strong>{owner}/{repo}</strong> codebase. 
             To use this with an AI assistant (like ChatGPT or Claude), simply provide it with this URL and tell it to scrape the page. 
             The AI will use the file tree below to navigate and read your source code!
           </p>
+          <CopyUrlButton />
         </section>
 
         {/* LLM Instructions */}
