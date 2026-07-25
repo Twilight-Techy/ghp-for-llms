@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LLM-Friendly GitHub Repository Viewer 🤖
 
-## Getting Started
+A Next.js application designed to make any GitHub repository easily readable and traversable by Large Language Models (LLMs) and AI agents. 
 
-First, run the development server:
+When you paste a link to a GitHub repository, this app dynamically generates a clean, semantic web representation of the repository's file tree and code contents. It's optimized to minimize token bloat while maximizing context for AI scrapers.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ✨ Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Dynamic Navigation:** Instantly browse any public GitHub repository via the `/[owner]/[repo]` URL structure.
+- **LLM-Optimized:** Code is rendered in a flat file structure with explicit `data-filepath` markers, saving tokens by avoiding heavily nested HTML trees while making it trivial for an LLM to read.
+- **Always Up to Date:** Utilizes Next.js Incremental Static Regeneration (ISR) to cache files for 5 minutes, preventing GitHub API rate limits while ensuring the code you view is always fresh.
+- **Force Refresh:** Built-in UI button to manually bust the cache and fetch the absolute latest commit instantly.
+- **Secure by Default:** Proactively checks repository metadata to prevent the accidental exposure of private repositories if you configure it with a privileged token.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Getting Started
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Prerequisites
 
-## Learn More
+You will need a **GitHub Personal Access Token (PAT)**. 
+> **Important:** It is highly recommended to use a Fine-grained PAT restricted to **Public Repositories (read-only)**.
 
-To learn more about Next.js, take a look at the following resources:
+### Running Locally
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Twilight-Techy/ghp-for-llms.git
+   cd ghp-for-llms
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-## Deploy on Vercel
+3. **Set up your environment variables:**
+   Create a `.env.local` file in the root of the project and add your token:
+   ```env
+   GITHUB_TOKEN=your_fine_grained_github_token_here
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🌍 Deployment (Vercel)
+
+The easiest way to deploy this Next.js app is to use the [Vercel Platform](https://vercel.com/new).
+
+1. Push your code to your GitHub repository.
+2. Import the project into your Vercel dashboard.
+3. Under **Environment Variables**, add your `GITHUB_TOKEN`.
+4. Click **Deploy**.
+
+## 🧠 How LLMs Navigate This App
+
+1. An LLM arrives at the repository root (`/[owner]/[repo]`).
+2. It reads the specific LLM instructions block and parses the full flat file tree list.
+3. It determines which file it needs to read and clicks the semantic link to that file (`/[owner]/[repo]/blob/[path]`).
+4. It reads the source code from the clean `<pre><code>` block and can follow the "Back to File Tree" link if it needs to read something else.
