@@ -62,7 +62,7 @@ export default function Home() {
           />
           <button
             type="submit"
-            className="px-4 py-3 bg-zinc-100 text-zinc-900 font-semibold rounded-lg hover:bg-white transition"
+            className="px-4 py-3 bg-zinc-100 text-zinc-900 font-semibold rounded-lg hover:bg-white transition cursor-pointer"
           >
             Generate Viewer
           </button>
